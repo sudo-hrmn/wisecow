@@ -1,0 +1,19 @@
+name: Wisecow Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: helm/kind-action@v1.10.0
+    - name: Deploy
+      run: |
+        docker build -t wisecow:latest .
+        kind load docker-image wisecow:latest --name chart-testing
+        kubectl apply -f k8s-deployment.yaml
+        kubectl get pods
