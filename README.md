@@ -1,5 +1,8 @@
 # Wisecow Application - Kubernetes Deployment
 
+## Architecture Diagram
+![Architecture Diagram](architecture%20diagram.png)
+
 ## Overview
 Containerized deployment of the Wisecow application on Kubernetes with CI/CD pipeline and TLS support.
 
@@ -31,16 +34,11 @@ kubectl apply -f k8s-ingress.yaml
 ```
 
 ## CI/CD Pipeline
-GitHub Actions automatically builds and deploys on push to main branch.
-
-Required secrets:
-- `DOCKER_USERNAME`
-- `DOCKER_PASSWORD` 
-- `KUBE_CONFIG`
+GitHub Actions automatically builds and deploys on push to main branch using Kind cluster.
 
 ## Files
 - `Dockerfile` - Container image
 - `k8s-deployment.yaml` - Kubernetes deployment and service
 - `k8s-ingress.yaml` - TLS ingress configuration
-- `.github/workflows/ci-cd.yaml` - CI/CD pipeline
-# CI/CD Pipeline with Kind cluster
+- `.github/workflows/wisecow-deploy.yml` - CI/CD pipeline
+- `ARCHITECTURE.md` - Detailed architecture documentation
